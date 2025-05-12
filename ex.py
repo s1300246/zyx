@@ -18,7 +18,7 @@ def kwic(text, target_ngram, context_size=5):
             highlighted_context = []
             for j in range(len(context)):
                 if j < len(context) - target_length + 1 and context[j:j + target_length] == target_words:
-                    highlighted_context.append(f"<{' '.join(target_words)}>")
+                    highlighted_context.append(f"<span style='color:red;'><{' '.join(target_words)}></span>")
                     j += target_length - 1  # Skip the target words
                     continue  # 次のループへ進む
                 else:
@@ -40,7 +40,7 @@ text = read_text_file(file_path)
 target_ngram = "in the"
 kwic_results = kwic(text, target_ngram)
 
-# 出力結果をresult.txtに書き込む
-with open('result.txt', 'w', encoding='utf-8') as f:
+# 出力結果をresult.htmlに書き込む
+with open('result.html', 'w', encoding='utf-8') as f:
     for result in kwic_results:
-        f.write(result + '\n')
+        f.write(result + '<br>\n')  # HTMLの改行を追加
